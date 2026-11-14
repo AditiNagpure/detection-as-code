@@ -15,7 +15,7 @@ logsource:
     product: windows
 detection:
     selection_img:
-        Image|endswith: '\schtask.exe'
+        Image|endswith: '\schtasks.exe'
     selection_create:
         CommandLine|contains: ' /create '
     selection_path:
