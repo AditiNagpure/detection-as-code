@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Task runs a payload from AppData every logon",
+      "Image": "C:\\Windows\\System32\\schtasks.exe",
+      "CommandLine": "schtasks.exe /create /tn \"OneDrive Sync\" /tr \"C:\\Users\\geet\\AppData\\Roaming\\sync.exe\" /sc onlogon /f",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "Task runs a script from Users\\Public every 10 minutes",
+      "Image": "C:\\Windows\\System32\\schtasks.exe",
+      "CommandLine": "schtasks /create /tn Updater /tr \"C:\\Users\\Public\\update.bat\" /sc minute /mo 10",
+      "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Admin creates a backup task from Program Files",
+      "Image": "C:\\Windows\\System32\\schtasks.exe",
+      "CommandLine": "schtasks /create /tn NightlyBackup /tr \"C:\\Program Files\\Backup\\backup.exe\" /sc daily /st 02:00",
+      "ParentImage": "C:\\Windows\\explorer.exe"
+    },
+    {
+      "description": "Querying existing tasks, not creating one",
+      "Image": "C:\\Windows\\System32\\schtasks.exe",
+      "CommandLine": "schtasks /query /fo LIST /v",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    }
+  ]
+}
