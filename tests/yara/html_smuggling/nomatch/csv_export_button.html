@@ -1,0 +1,15 @@
+<html>
+<body>
+<button onclick="exportCsv()">Export report</button>
+<script>
+  function exportCsv() {
+    var csv = "name,score\nAditi,92\n";
+    var file = new Blob([csv], {type: "text/csv"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(file);
+    a.download = "report.csv";
+    a.click();
+  }
+</script>
+</body>
+</html>

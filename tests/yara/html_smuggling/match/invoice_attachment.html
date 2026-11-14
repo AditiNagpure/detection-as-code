@@ -1,0 +1,16 @@
+<html>
+<body>
+<p>Your invoice is downloading...</p>
+<script>
+  var data = atob("UEsDBBQAAAAIAHRlc3QgZmlsZSBvbmx5");
+  var bytes = new Uint8Array(data.length);
+  for (var i = 0; i < data.length; i++) { bytes[i] = data.charCodeAt(i); }
+  var file = new Blob([bytes], {type: "application/zip"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(file);
+  a.download = "Invoice_4471.zip";
+  document.body.appendChild(a);
+  a.click();
+</script>
+</body>
+</html>

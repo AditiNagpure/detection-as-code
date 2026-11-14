@@ -1,0 +1,3 @@
+# Builds a command locally and runs it; nothing is downloaded
+$cmd = 'Get-Service | Where-Object Status -eq Running | Measure-Object'
+Invoke-Expression $cmd

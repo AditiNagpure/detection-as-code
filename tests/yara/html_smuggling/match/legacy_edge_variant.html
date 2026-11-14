@@ -1,0 +1,6 @@
+<HTML><BODY><SCRIPT>
+var raw = atob("SGVsbG8sIHRoaXMgaXMgYSB0ZXN0");
+var blob = new Blob([raw], {type: "application/octet-stream"});
+if (window.navigator.msSaveOrOpenBlob) { window.navigator.msSaveOrOpenBlob(blob, "Scan_0932.iso"); }
+else { var l = document.createElement("a"); l.href = window.URL.createObjectURL(blob); l.download = "Scan_0932.iso"; l.click(); }
+</SCRIPT></BODY></HTML>

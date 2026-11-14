@@ -27,5 +27,8 @@ jobs:
       - name: Validate Sigma rules (syntax, metadata, ATT&CK tags)
         run: sigma check --fail-on-issues rules/sigma
 
-      - name: Test rules against sample logs
-        run: pytest scripts -v
+      - name: Test Sigma rules against sample logs
+        run: pytest scripts/test_sigma_rules.py -v
+
+      - name: Compile and test YARA rules against sample files
+        run: pytest scripts/test_yara_rules.py -v
