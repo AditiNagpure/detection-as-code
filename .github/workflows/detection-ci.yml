@@ -32,3 +32,7 @@ jobs:
 
       - name: Compile and test YARA rules against sample files
         run: pytest scripts/test_yara_rules.py -v
+
+
+      - name: Validate Sentinel analytics rules (schema, timing, entity mappings)
+        run: pytest scripts/test_sentinel_rules.py -v

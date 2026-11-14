@@ -1,0 +1,41 @@
+id: beb43ce2-c130-44ba-b714-574ffbd74370
+name: MFA Fatigue - Repeated MFA Failures for One User
+description: |
+  Detects a user failing the MFA step of sign-in several times within an hour. Attackers who already
+  have the password keep sending push requests hoping the user approves one out of annoyance
+  (MFA fatigue / MFA bombing).
+severity: High
+requiredDataConnectors:
+  - connectorId: AzureActiveDirectory
+    dataTypes:
+      - SigninLogs
+queryFrequency: 1h
+queryPeriod: 1h
+triggerOperator: gt
+triggerThreshold: 0
+tactics:
+  - CredentialAccess
+relevantTechniques:
+  - T1621
+query: |
+  let min_mfa_failures = 3;
+  SigninLogs
+  | where ResultType == "500121"
+  | summarize
+      MfaFailures = count(),
+      Apps = make_set(AppDisplayName, 10),
+      FirstSeen = min(TimeGenerated),
+      LastSeen = max(TimeGenerated)
+      by UserPrincipalName, IPAddress
+  | where MfaFailures >= min_mfa_failures
+entityMappings:
+  - entityType: Account
+    fieldMappings:
+      - identifier: FullName
+        columnName: UserPrincipalName
+  - entityType: IP
+    fieldMappings:
+      - identifier: Address
+        columnName: IPAddress
+version: 1.0.0
+kind: Scheduled
