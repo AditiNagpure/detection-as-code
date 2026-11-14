@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Ransomware-style vssadmin wipe of all shadow copies",
+      "Image": "C:\\Windows\\System32\\vssadmin.exe",
+      "CommandLine": "vssadmin.exe Delete Shadows /All /Quiet",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "Same wipe done through WMIC instead of vssadmin",
+      "Image": "C:\\Windows\\System32\\wbem\\WMIC.exe",
+      "CommandLine": "wmic.exe shadowcopy delete /nointeractive",
+      "ParentImage": "C:\\Users\\Public\\enc.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Admin only listing shadow copies",
+      "Image": "C:\\Windows\\System32\\vssadmin.exe",
+      "CommandLine": "vssadmin list shadows",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "WMIC used for something unrelated",
+      "Image": "C:\\Windows\\System32\\wbem\\WMIC.exe",
+      "CommandLine": "wmic process where name='notepad.exe' delete",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    }
+  ]
+}

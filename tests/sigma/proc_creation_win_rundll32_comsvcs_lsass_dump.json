@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Classic LSASS dump to Temp using the MiniDump export name",
+      "Image": "C:\\Windows\\System32\\rundll32.exe",
+      "CommandLine": "rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Windows\\Temp\\out.dmp full",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "Evasive variant calling the export by its number (#24)",
+      "Image": "C:\\Windows\\System32\\rundll32.exe",
+      "CommandLine": "rundll32 comsvcs.dll #24 624 C:\\Users\\Public\\d.bin full",
+      "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Normal rundll32 use: opening the printer settings dialog",
+      "Image": "C:\\Windows\\System32\\rundll32.exe",
+      "CommandLine": "rundll32.exe printui.dll,PrintUIEntry /p /n \"Office Printer\"",
+      "ParentImage": "C:\\Windows\\explorer.exe"
+    },
+    {
+      "description": "Registering comsvcs.dll with regsvr32, not dumping memory",
+      "Image": "C:\\Windows\\System32\\regsvr32.exe",
+      "CommandLine": "regsvr32.exe /s C:\\Windows\\System32\\comsvcs.dll",
+      "ParentImage": "C:\\Windows\\System32\\msiexec.exe"
+    }
+  ]
+}
