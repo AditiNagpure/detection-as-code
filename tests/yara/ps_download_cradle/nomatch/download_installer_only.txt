@@ -1,0 +1,3 @@
+# Admin script: download an installer to disk, no code execution from memory
+Invoke-WebRequest -Uri 'https://example.com/tools/setup.msi' -OutFile 'C:\Temp\setup.msi'
+Start-Process msiexec.exe -ArgumentList '/i C:\Temp\setup.msi /qn' -Wait

