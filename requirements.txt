@@ -1,0 +1,6 @@
+sigma-cli==4.0.1
+pySigma==2.1.0
+pySigma-backend-sqlite==2.1.1
+yara-python==4.5.4
+PyYAML==6.0.3
+pytest==9.2.0

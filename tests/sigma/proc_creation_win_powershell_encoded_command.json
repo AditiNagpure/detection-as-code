@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Short -enc flag with Base64 payload",
+      "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -NoP -W Hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAKQA=",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "Full -EncodedCommand flag in PowerShell 7",
+      "Image": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "CommandLine": "pwsh.exe -EncodedCommand VwByAGkAdABlAC0ASABvAHMAdAAgACIAaABpACIA",
+      "ParentImage": "C:\\Windows\\explorer.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Normal PowerShell script run by an admin",
+      "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe -File C:\\Scripts\\backup.ps1",
+      "ParentImage": "C:\\Windows\\explorer.exe"
+    },
+    {
+      "description": "Encoded flag but not PowerShell",
+      "Image": "C:\\Tools\\encoder.exe",
+      "CommandLine": "encoder.exe -enc input.txt",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    }
+  ]
+}
