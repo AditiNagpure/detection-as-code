@@ -1,0 +1,29 @@
+title: Shadow Copy Deletion With Vssadmin or WMIC
+id: a3757554-6da4-4fc2-a280-089e8e0ef6bb
+status: test
+description: Detects deletion of Volume Shadow Copies with vssadmin or wmic. Ransomware such as LockBit does this just before encrypting files so victims cannot restore from Windows backups.
+references:
+    - https://attack.mitre.org/techniques/T1490/
+author: Aditi Nagpure
+date: 2026-11-14
+tags:
+    - attack.impact
+    - attack.t1490
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_vssadmin:
+        Image|endswith: '\vssadmin.exe'
+        CommandLine|contains|all:
+            - 'delete'
+            - 'shadows'
+    selection_wmic:
+        Image|endswith: '\wmic.exe'
+        CommandLine|contains|all:
+            - 'shadowcopy'
+            - 'delete'
+    condition: 1 of selection_*
+falsepositives:
+    - Backup software or administrators deliberately cleaning up old shadow copies
+level: high

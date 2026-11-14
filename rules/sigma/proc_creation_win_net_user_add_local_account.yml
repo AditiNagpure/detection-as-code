@@ -1,0 +1,29 @@
+title: Local User Account Created With Net.exe
+id: 337e1102-59ea-44be-aca2-ce9aaa19ca73
+status: test
+description: Detects a new local user account being created from the command line with net user /add. Attackers create their own accounts to keep access even if the original compromised account is reset.
+references:
+    - https://attack.mitre.org/techniques/T1136/001/
+author: Aditi Nagpure
+date: 2026-11-14
+tags:
+    - attack.persistence
+    - attack.t1136.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith:
+            - '\net.exe'
+            - '\net1.exe'
+    selection_cli:
+        CommandLine|contains|all:
+            - ' user '
+            - '/add'
+    filter_domain:
+        CommandLine|contains: '/domain'
+    condition: all of selection_* and not filter_domain
+falsepositives:
+    - IT staff or provisioning scripts creating local accounts on new machines
+level: medium

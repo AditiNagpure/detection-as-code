@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Attacker creates a backdoor local account",
+      "Image": "C:\\Windows\\System32\\net.exe",
+      "CommandLine": "net user svc_backup P@ssw0rd123! /add",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "Same command seen through net1.exe, which net.exe hands off to",
+      "Image": "C:\\Windows\\System32\\net1.exe",
+      "CommandLine": "C:\\Windows\\system32\\net1 user svc_backup P@ssw0rd123! /add",
+      "ParentImage": "C:\\Windows\\System32\\net.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Admin only listing local users",
+      "Image": "C:\\Windows\\System32\\net.exe",
+      "CommandLine": "net user",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "Domain account creation, out of scope for this local-account rule",
+      "Image": "C:\\Windows\\System32\\net.exe",
+      "CommandLine": "net user jdoe Welcome1 /add /domain",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    }
+  ]
+}
