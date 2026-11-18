@@ -1,0 +1,3 @@
+MZ - test fixture standing in for a legitimate parental-control or employee-monitoring tool.
+It shares one generic phrase with Remcos but nothing else, so the rule must stay quiet:
+Online Keylogger Started

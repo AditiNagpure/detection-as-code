@@ -1,0 +1,33 @@
+title: PowerShell Adds Defender Exclusion for a User-Writable Folder
+id: c15d4694-e50f-43fa-afe1-fccb6f44ea25
+status: test
+description: Detects PowerShell using Add-MpPreference -ExclusionPath to stop Microsoft Defender scanning a file or folder under Temp, AppData or Users\Public. Remcos does this for its own executable straight after a UAC bypass.
+references:
+    - https://attack.mitre.org/techniques/T1685/
+    - https://app.any.run/tasks/218662a7-3d0e-4d3b-a39d-23d183123727
+author: Aditi Nagpure
+date: 2026-11-18
+tags:
+    - attack.defense-impairment
+    - attack.t1685
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_cmdlet:
+        CommandLine|contains: 'Add-MpPreference'
+    selection_param:
+        CommandLine|contains: '-ExclusionPath'
+    selection_path:
+        CommandLine|contains:
+            - '\AppData\'
+            - '\Temp\'
+            - '\Users\Public\'
+    condition: all of selection_*
+falsepositives:
+    - Developers or admins excluding a build or cache folder under AppData; review the excluded path and the parent process
+level: high

@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Remcos (ANY.RUN 218662a7) excludes its own exe in Temp",
+      "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe Add-MpPreference -ExclusionPath \"C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe\"",
+      "ParentImage": "C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe"
+    },
+    {
+      "description": "pwsh excludes a whole folder under Users\\Public",
+      "Image": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "CommandLine": "pwsh -NoProfile -Command Add-MpPreference -ExclusionPath C:\\Users\\Public\\Libraries",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Admin excludes a database folder on a data drive",
+      "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe Add-MpPreference -ExclusionPath \"D:\\SQLData\"",
+      "ParentImage": "C:\\Windows\\explorer.exe"
+    },
+    {
+      "description": "Reading Defender settings, not changing them",
+      "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "powershell.exe Get-MpPreference | Select ExclusionPath",
+      "ParentImage": "C:\\Windows\\explorer.exe"
+    }
+  ]
+}

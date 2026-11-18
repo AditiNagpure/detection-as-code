@@ -1,0 +1,24 @@
+title: Taskkill Force-Closes CMSTP
+id: 9420af50-b788-40fb-86bf-86078d41d1e8
+status: test
+description: Detects taskkill forcibly ending cmstp.exe. After a CMSTP UAC bypass, Remcos kills cmstp.exe so the connection-manager window never appears to the user.
+references:
+    - https://attack.mitre.org/techniques/T1070/
+    - https://app.any.run/tasks/218662a7-3d0e-4d3b-a39d-23d183123727
+author: Aditi Nagpure
+date: 2026-11-18
+tags:
+    - attack.stealth
+    - attack.t1070
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\taskkill.exe'
+    selection_target:
+        CommandLine|contains: 'cmstp.exe'
+    condition: all of selection_*
+falsepositives:
+    - Help-desk scripts closing a hung VPN dialler
+level: medium

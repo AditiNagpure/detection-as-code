@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Remcos (ANY.RUN 218662a7) runs cmstp with a random .inf in Windows\\Temp",
+      "Image": "C:\\Windows\\System32\\cmstp.exe",
+      "CommandLine": "cmstp.exe /au C:\\windows\\temp\\epdhf45p.inf",
+      "ParentImage": "C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe"
+    },
+    {
+      "description": "Same technique with the .inf in the user's AppData",
+      "Image": "C:\\Windows\\SysWOW64\\cmstp.exe",
+      "CommandLine": "cmstp /s /au \"C:\\Users\\geet\\AppData\\Local\\x7.inf\"",
+      "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "IT installs a signed VPN profile from Program Files",
+      "Image": "C:\\Windows\\System32\\cmstp.exe",
+      "CommandLine": "cmstp.exe /au \"C:\\Program Files\\CorpVPN\\corpvpn.inf\"",
+      "ParentImage": "C:\\Windows\\System32\\msiexec.exe"
+    },
+    {
+      "description": "Uninstalling a profile, no /au",
+      "Image": "C:\\Windows\\System32\\cmstp.exe",
+      "CommandLine": "cmstp.exe /u /s C:\\Windows\\Temp\\old.inf",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    }
+  ]
+}
