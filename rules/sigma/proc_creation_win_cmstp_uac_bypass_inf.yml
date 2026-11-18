@@ -1,0 +1,34 @@
+title: CMSTP Installs a Connection Profile From a User-Writable Folder
+id: 829252b5-094b-4874-be78-c42f92f25230
+status: test
+description: Detects cmstp.exe run with /au and an .inf file located in a Temp or AppData folder. Malware such as Remcos drops a crafted .inf there and abuses the auto-elevating CMSTPLUA COM object to bypass UAC.
+references:
+    - https://attack.mitre.org/techniques/T1218/003/
+    - https://attack.mitre.org/techniques/T1548/002/
+    - https://app.any.run/tasks/218662a7-3d0e-4d3b-a39d-23d183123727
+author: Aditi Nagpure
+date: 2026-11-18
+tags:
+    - attack.stealth
+    - attack.privilege-escalation
+    - attack.t1218.003
+    - attack.t1548.002
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith: '\cmstp.exe'
+    selection_flag:
+        CommandLine|contains: '/au'
+    selection_inf:
+        CommandLine|contains: '.inf'
+    selection_path:
+        CommandLine|contains:
+            - '\Temp\'
+            - '\AppData\'
+            - '\Users\Public\'
+    condition: all of selection_*
+falsepositives:
+    - VPN or dial-up connection profiles installed by an installer that unpacks to Temp (rare on modern systems)
+level: high

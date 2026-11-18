@@ -1,0 +1,4 @@
+MZ - test fixture, not a real program. A different combination of strings, to show the rule does not depend on one exact string.
+Remcos restarted by watchdog!
+Keylogger initialization failure: error
+BreakingSecurity.net

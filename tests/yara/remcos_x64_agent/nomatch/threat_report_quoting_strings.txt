@@ -1,0 +1,4 @@
+Threat report excerpt (plain text, not an executable).
+Analysts often quote Remcos log strings such as "Remcos Agent initialized (", "Watchdog module activated",
+"Offline Keylogger Started" and "BreakingSecurity.net". The rule must not fire on documents like this,
+which is why it requires the file to start with the MZ executable header.

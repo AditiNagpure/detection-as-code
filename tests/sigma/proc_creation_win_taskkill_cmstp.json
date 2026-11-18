@@ -1,0 +1,24 @@
+{
+  "should_match": [
+    {
+      "description": "Remcos (ANY.RUN 218662a7) cleans up after the UAC bypass",
+      "Image": "C:\\Windows\\System32\\taskkill.exe",
+      "CommandLine": "taskkill.exe /IM cmstp.exe /F",
+      "ParentImage": "C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Admin kills a frozen browser",
+      "Image": "C:\\Windows\\System32\\taskkill.exe",
+      "CommandLine": "taskkill /IM chrome.exe /F",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe"
+    },
+    {
+      "description": "cmstp itself running, not being killed",
+      "Image": "C:\\Windows\\System32\\cmstp.exe",
+      "CommandLine": "cmstp.exe /au C:\\windows\\temp\\epdhf45p.inf",
+      "ParentImage": "C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe"
+    }
+  ]
+}

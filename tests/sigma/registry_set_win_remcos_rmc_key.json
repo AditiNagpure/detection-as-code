@@ -1,0 +1,30 @@
+{
+  "should_match": [
+    {
+      "description": "Remcos (ANY.RUN 218662a7) stores its operator licence ID",
+      "TargetObject": "HKU\\S-1-5-21-1693682860-607145093-2874071422-1001\\SOFTWARE\\Rmc-VG7GUV\\licence",
+      "Details": "18BE3E537CEBAA5553E2FD0879B00F48",
+      "Image": "C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe"
+    },
+    {
+      "description": "Remcos stores its encrypted install path",
+      "TargetObject": "HKU\\S-1-5-21-1693682860-607145093-2874071422-1001\\SOFTWARE\\Rmc-VG7GUV\\exepath",
+      "Details": "Binary Data",
+      "Image": "C:\\Users\\admin\\AppData\\Local\\Temp\\exe.exe"
+    }
+  ],
+  "should_not_match": [
+    {
+      "description": "Unrelated app storing a licence value",
+      "TargetObject": "HKU\\S-1-5-21-1693682860-607145093-2874071422-1001\\SOFTWARE\\Adobe\\Acrobat\\licence",
+      "Details": "ABCD-1234",
+      "Image": "C:\\Program Files\\Adobe\\Acrobat\\Acrobat.exe"
+    },
+    {
+      "description": "Key name only partly similar (RmcTools vendor)",
+      "TargetObject": "HKU\\S-1-5-21-1693682860-607145093-2874071422-1001\\SOFTWARE\\RmcTools\\Settings\\theme",
+      "Details": "dark",
+      "Image": "C:\\Program Files\\RmcTools\\rmc.exe"
+    }
+  ]
+}

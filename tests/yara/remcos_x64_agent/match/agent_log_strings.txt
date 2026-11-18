@@ -1,0 +1,5 @@
+MZ - test fixture, not a real program. Starts with the PE magic bytes so the rule treats it like an executable.
+Contains three Remcos agent log strings copied from sample 24a6ed8c (FLOSS output):
+Remcos Agent initialized (
+Watchdog module activated
+Offline Keylogger Started
